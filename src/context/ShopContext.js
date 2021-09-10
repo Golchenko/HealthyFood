@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Client from 'shopify-buy'
+import Client from 'shopify-buy';
 
 const ShopContext = React.createContext();
 
@@ -20,56 +20,87 @@ class ShopProvider extends Component {
         products: [],
         checkout: {},
         isCartOpen: false,
-        isMobileMenuOpen: false
+        isMenuOpen: false
     };
 
+    componentDidMount() {
+        if (localStorage.checkout_id) {
+            this.fetchCheckout(localStorage.checkout_id)
+        } else {
+            this.createCheckout();
+        }
+    }
+
     createCheckout = async () => {
-
+        const checkout = await client.checkout.create();
+        localStorage.setItem('checkout_id', checkout.id);
+        this.setState({ checkout: checkout });
     }
 
-    fetchCheckout = async () => {
-
+    fetchCheckout = async (checkoutId) => {
+        client.checkout
+            .fetch(checkoutId)
+            .then((checkout) => {
+                this.setState({ checkout: checkout })
+            })
     }
 
-    addItemToCheckout = async (lineItemIdsToRemove) => {
+    addItemToCheckout = async (variantId, quantity) => {
+        const lineItemsToAdd = [
+            {
+                variantId: variantId,
+                quantity: parseInt(quantity, 10)
+            }
+        ]
+        const checkout = await client.checkout.addLineItems(this.state.checkout.id, lineItemsToAdd);
+        this.setState({ checkout: checkout })
+    };
 
-    }
+    removeLineItem = async (lineItemIdsToRemove) => {
+        const checkout = await client.checkout.removeLineItems(this.state.checkout.id, lineItemIdsToRemove)
+        this.setState({ checkout: checkout })
+    };
 
     fetchAllProducts = async () => {
-
-    }
+        console.log("client:", client.domain);
+        const products = await client.product.fetchAll();
+        this.setState({ products: products });
+    };
 
     fetchProductWithHandle = async (handle) => {
-
-    }
+        const product = await client.product.fetchByHandle(handle);
+        this.setState({ product: product });
+        return product;
+    };
 
     closeCart = () => {
+        this.setState({ isCartOpen: false })
+    };
 
-    }
-
-    opencart = () => {
-
-    }
-
-    openMenu = () => {
-
-    }
+    openCart = () => {
+        this.setState({ isCartOpen: true })
+    };
 
     closeMenu = () => {
+        this.setState({ isMenuOpen: false })
+    };
 
-    }
+    openMenu = () => {
+        this.setState({ isMenuOpen: true })
+    };
 
     render() {
+        console.log(this.state.checkout)
         return (
             <ShopContext.Provider>
                 {this.props.children}
             </ShopContext.Provider>
-        )
+        );
     }
 }
 
-const ShopConsumer = ShopContext.Consumer
+const ShopConsumer = ShopContext.Consumer;
 
-export { ShopConsumer, ShopContext }
+export { ShopConsumer, ShopContext };
 
-export default ShopProvider
+export default ShopProvider;
