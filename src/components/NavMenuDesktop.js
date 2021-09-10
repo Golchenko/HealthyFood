@@ -20,21 +20,21 @@ const NavMenuDesktop = () => {
     return (
         <Flex flexDir="row" alignItems="center">
             <HStack>
+                <Link to="/">Home</Link>
+                <Link to="/">About Us</Link>
                 <Menu>
                     <MenuButton as={Button}>
                         Menu
                     </MenuButton>
                     <MenuList>
-                        <MenuItem>Item 1</MenuItem>
-                        <MenuItem>Item 2</MenuItem>
-                        <MenuItem>Item 3</MenuItem>
-                        <MenuItem>Item 4</MenuItem>
+                        <MenuItem>Meat</MenuItem>
+                        <MenuItem>Salad</MenuItem>
+                        <MenuItem>Burgers</MenuItem>
+                        <MenuItem>Drinks</MenuItem>
                     </MenuList>
                 </Menu>
-                <Link to="/">1</Link>
-                <Link to="/">2</Link>
-                <Link to="/">3</Link>
-                <Link to="/">4</Link>
+                <Link to="/">Features</Link>
+                <Link to="/">Contact Us</Link>
             </HStack>
         </Flex>
     )
