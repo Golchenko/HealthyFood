@@ -7,7 +7,19 @@ import Product from "./pages/Product";
 function App() {
   return (
     <div className="App">
-      <Home />
+      <Router>
+        <Switch>
+          <Route path="/products/:handle">
+            <Product />
+          </Route>
+          <Route path="/catalog">
+            <Catalog />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }

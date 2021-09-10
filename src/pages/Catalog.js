@@ -1,10 +1,14 @@
-import React from 'react'
+import React, {useContext, useEffect} from 'react'
+import { ShopContext } from '../context/ShopContext'
+import  ProductList from '../components/ProductList'
+import { Box, Grid, Text, Image } from '@chakra-ui/react'
+
 
 const Catalog = () => {
     return (
-        <div>
-            <h1>Catalog page</h1>
-        </div>
+        <Box>
+            <ProductList />
+        </Box>
     )
 }
 
