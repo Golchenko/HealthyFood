@@ -1,38 +1,27 @@
 import React from 'react'
 import {
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    MenuItemOption,
-    MenuGroup,
-    MenuOptionGroup,
-    MenuIcon,
-    MenuCommand,
-    MenuDivider,
-    Button,
     Flex,
     HStack,
-    Link
+    VStack,
+    Box
 } from "@chakra-ui/react"
+import {Link} from 'react-router-dom'
 
-const NavMenuDesktop = () => {
+const NavMenuDesktop = ({ linkType }) => {
     return (
-        <Flex flexDir="row" alignItems="center">
-            <HStack>
-                <Link to="/">Home</Link>
+        <Flex className="desktop-menu" flexDir="row" alignItems="center">
+            <HStack spacing="2.5rem">
+                <Link to="/" className={linkType}  >Home</Link>
                 <Link to="/">About Us</Link>
-                <Menu>
-                    <MenuButton as={Button}>
-                        Menu
-                    </MenuButton>
-                    <MenuList>
-                        <MenuItem>Meat</MenuItem>
-                        <MenuItem>Salad</MenuItem>
-                        <MenuItem>Burgers</MenuItem>
-                        <MenuItem>Drinks</MenuItem>
-                    </MenuList>
-                </Menu>
+                <Box className="desktop-menu has-submenu">
+                        <Link className="desktop-menu__link" to="/catalog" >Menu</Link>
+                    <VStack className="desktop-submenu__list" alignItems="flex-start">
+                        <Link to="/">Meat</Link>
+                        <Link to="/">Salad</Link>
+                        <Link to="/">Burgers</Link>
+                        <Link to="/">Drinks</Link>
+                    </VStack>
+                </Box>
                 <Link to="/">Features</Link>
                 <Link to="/">Contact Us</Link>
             </HStack>

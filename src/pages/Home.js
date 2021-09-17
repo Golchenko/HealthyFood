@@ -5,7 +5,8 @@ import Footer from '../components/Footer'
 const Home = () => {
     return (
         <div>
-            <Header />
+            <Header 
+            linkType="active-menu"/>
             <h1>Home Page</h1>
             <Footer />
             

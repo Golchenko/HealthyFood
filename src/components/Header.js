@@ -1,17 +1,16 @@
 import React, { useContext } from 'react'
-import { Box, Badge, Icon, Image, Flex } from '@chakra-ui/react'
+import { Box, Badge, Icon, Image, Flex, Button } from '@chakra-ui/react'
 import { ShopContext } from '../context/ShopContext'
 import NavMenuDesktop from '../components/NavMenuDesktop'
 import { MdMenu, MdShoppingCart } from 'react-icons/md'
-import { Link } from 'react-router-dom'
 
-const Header = (logo) => {
+const Header = () => {
 
     const { openCart, openMenu, checkout } = useContext(ShopContext);
 
     return (
-        <Flex flexDir="row" alignItems="center" justifyContent="space-between">
-            <Flex flexDir="row" alignItems="center">
+        <Flex className="site-header" flexDir="row" alignItems="center" justifyContent="space-between">
+            <Box className="burger-button">
                 <Icon
                     as={MdMenu}
                     width={30}
@@ -19,21 +18,24 @@ const Header = (logo) => {
                     cursor="pointer"
                     onClick={() => openMenu()}
                 />
-                <Image
-                    width={44}
-                    height={44}
-                    src="https://cdn.shopify.com/s/files/1/0498/0601/6664/files/FoodLogo.svg?v=1631293033" />
-                <NavMenuDesktop />
-            </Flex>
+            </Box>
+            <Image
+                className="main-logo"
+                src="https://cdn.shopify.com/s/files/1/0498/0601/6664/files/FoodLogo.svg?v=1631293033"
+            />
+            <NavMenuDesktop
+                linkType="active-menu"
+            />
             <Box>
-                <Icon
-                    as={MdShoppingCart}
-                    width={30}
-                    height={30}
-                    cursor="pointer"
+                <Button
+                    width={155}
+                    height={46}
+                    background="#DC780B"
                     onClick={() => openCart()}
-                />
-                <Badge backgroundColor="#ff38bd" borderRadius="50%">{checkout.lineItems?.length}</Badge>
+                >
+                    Booking Now
+                    <Badge className="cart-badge" backgroundColor="#fff" borderRadius="50%">{checkout.lineItems?.length}</Badge>
+                </Button>
             </Box>
         </Flex>
     )

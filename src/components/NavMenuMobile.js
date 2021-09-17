@@ -12,7 +12,7 @@ import {
     VStack
 } from '@chakra-ui/react'
 
-const NavMenu = () => {
+const NavMenu = ({ linkType }) => {
 
     const { isMenuOpen, closeMenu } = useContext(ShopContext)
 

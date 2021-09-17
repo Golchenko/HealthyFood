@@ -4,12 +4,14 @@ import Home from "./pages/Home";
 import Catalog from "./pages/Catalog";
 import Product from "./pages/Product";
 import NavMenuMobile from "./components/NavMenuMobile"
+import Cart from './components/Cart';
 
 function App() {
   return (
     <div className="App">
       <Router>
         <NavMenuMobile />
+        <Cart />
         <Switch>
           <Route path="/products/:handle">
             <Product />
